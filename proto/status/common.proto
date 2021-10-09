@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package omo.msp.status;
-option go_package= "status";
+option go_package= "proto/status";
 
 enum ResultStatus {
   Success = 0;
@@ -16,5 +16,13 @@ enum ResultStatus {
   Prohibition = 9;
   NotMatch = 10;
   FormatError = 11;
+}
+
+message Request{
+  string code = 1;
+}
+
+message Response{
+  string data = 1;
 }
 
