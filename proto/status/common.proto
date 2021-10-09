@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package omo.msp.status;
+option go_package= "status";
+
+enum ResultStatus {
+  Success = 0;
+  MaxLimit = 1;
+  Repeated = 2;
+  NotExisted = 3;
+  DBException = 4;
+  Empty = 5;
+  TokenEmpty = 6;
+  TokenMiss = 7;
+  TokenUnusable = 8;
+  Prohibition = 9;
+  NotMatch = 10;
+  FormatError = 11;
+}
+
