@@ -16,6 +16,10 @@ enum ResultStatus {
   Prohibition = 9;
   NotMatch = 10;
   FormatError = 11;
+
+  UserNotExisted = 1001;
+  UserRepeated = 1002;
+  UserFreeze = 1003;
 }
 
 message Request{
