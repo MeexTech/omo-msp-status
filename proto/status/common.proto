@@ -20,6 +20,7 @@ enum ResultStatus {
   UserNotExisted = 1001;
   UserRepeated = 1002;
   UserFreeze = 1003;
+  SNSWechat = 1101;
 }
 
 message Request{
