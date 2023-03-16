@@ -16,6 +16,8 @@ enum ResultStatus {
   Prohibition = 9;
   NotMatch = 10;
   FormatError = 11;
+  DownloadFailed = 12;
+  ServerError = 13;
 
   UserNotExisted = 1001;
   UserRepeated = 1002;
