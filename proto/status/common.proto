@@ -19,6 +19,9 @@ enum ResultStatus {
   DownloadFailed = 12;
   ServerError = 13;
 
+  VerifyFailed = 98;
+  MustBind = 99;
+
   UserNotExisted = 1001;
   UserRepeated = 1002;
   UserFreeze = 1003;
