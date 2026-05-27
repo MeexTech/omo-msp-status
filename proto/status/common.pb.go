@@ -20,167 +20,499 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type ResultStatus int32
+type ActivityStatus int32
 
 const (
-	ResultStatus_Success        ResultStatus = 0
-	ResultStatus_MaxLimit       ResultStatus = 1
-	ResultStatus_Repeated       ResultStatus = 2
-	ResultStatus_NotExisted     ResultStatus = 3
-	ResultStatus_DBException    ResultStatus = 4
-	ResultStatus_Empty          ResultStatus = 5
-	ResultStatus_TokenEmpty     ResultStatus = 6
-	ResultStatus_TokenMiss      ResultStatus = 7
-	ResultStatus_TokenUnusable  ResultStatus = 8
-	ResultStatus_Prohibition    ResultStatus = 9
-	ResultStatus_NotMatch       ResultStatus = 10
-	ResultStatus_FormatError    ResultStatus = 11
-	ResultStatus_DownloadFailed ResultStatus = 12
-	ResultStatus_ServerError    ResultStatus = 13
-	ResultStatus_VerifyFailed   ResultStatus = 98
-	ResultStatus_MustBind       ResultStatus = 99
-	ResultStatus_UserNotExisted ResultStatus = 1001
-	ResultStatus_UserRepeated   ResultStatus = 1002
-	ResultStatus_UserFreeze     ResultStatus = 1003
-	ResultStatus_SNSWechat      ResultStatus = 1101
+	ActivityStatus_Draft   ActivityStatus = 0
+	ActivityStatus_Check   ActivityStatus = 1
+	ActivityStatus_Pending ActivityStatus = 2
+	ActivityStatus_Release ActivityStatus = 3
+	ActivityStatus_Publish ActivityStatus = 4
+	ActivityStatus_Abandon ActivityStatus = 5
 )
 
-var ResultStatus_name = map[int32]string{
-	0:    "Success",
-	1:    "MaxLimit",
-	2:    "Repeated",
-	3:    "NotExisted",
-	4:    "DBException",
-	5:    "Empty",
-	6:    "TokenEmpty",
-	7:    "TokenMiss",
-	8:    "TokenUnusable",
-	9:    "Prohibition",
-	10:   "NotMatch",
-	11:   "FormatError",
-	12:   "DownloadFailed",
-	13:   "ServerError",
-	98:   "VerifyFailed",
-	99:   "MustBind",
-	1001: "UserNotExisted",
-	1002: "UserRepeated",
-	1003: "UserFreeze",
-	1101: "SNSWechat",
+var ActivityStatus_name = map[int32]string{
+	0: "Draft",
+	1: "Check",
+	2: "Pending",
+	3: "Release",
+	4: "Publish",
+	5: "Abandon",
 }
 
-var ResultStatus_value = map[string]int32{
-	"Success":        0,
-	"MaxLimit":       1,
-	"Repeated":       2,
-	"NotExisted":     3,
-	"DBException":    4,
-	"Empty":          5,
-	"TokenEmpty":     6,
-	"TokenMiss":      7,
-	"TokenUnusable":  8,
-	"Prohibition":    9,
-	"NotMatch":       10,
-	"FormatError":    11,
-	"DownloadFailed": 12,
-	"ServerError":    13,
-	"VerifyFailed":   98,
-	"MustBind":       99,
-	"UserNotExisted": 1001,
-	"UserRepeated":   1002,
-	"UserFreeze":     1003,
-	"SNSWechat":      1101,
+var ActivityStatus_value = map[string]int32{
+	"Draft":   0,
+	"Check":   1,
+	"Pending": 2,
+	"Release": 3,
+	"Publish": 4,
+	"Abandon": 5,
 }
 
-func (x ResultStatus) String() string {
-	return proto.EnumName(ResultStatus_name, int32(x))
+func (x ActivityStatus) String() string {
+	return proto.EnumName(ActivityStatus_name, int32(x))
 }
 
-func (ResultStatus) EnumDescriptor() ([]byte, []int) {
+func (ActivityStatus) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_646a8dd68e24f450, []int{0}
 }
 
-type Request struct {
-	Code                 string   `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+type ActivityType int32
+
+const (
+	ActivityType_Normal   ActivityType = 0
+	ActivityType_Template ActivityType = 1
+	ActivityType_Open     ActivityType = 2
+	ActivityType_Beginner ActivityType = 3
+	ActivityType_Reading  ActivityType = 4
+	ActivityType_Place    ActivityType = 5
+	ActivityType_Custom   ActivityType = 6
+)
+
+var ActivityType_name = map[int32]string{
+	0: "Normal",
+	1: "Template",
+	2: "Open",
+	3: "Beginner",
+	4: "Reading",
+	5: "Place",
+	6: "Custom",
 }
 
-func (m *Request) Reset()         { *m = Request{} }
-func (m *Request) String() string { return proto.CompactTextString(m) }
-func (*Request) ProtoMessage()    {}
-func (*Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_646a8dd68e24f450, []int{0}
+var ActivityType_value = map[string]int32{
+	"Normal":   0,
+	"Template": 1,
+	"Open":     2,
+	"Beginner": 3,
+	"Reading":  4,
+	"Place":    5,
+	"Custom":   6,
 }
 
-func (m *Request) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Request.Unmarshal(m, b)
-}
-func (m *Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Request.Marshal(b, m, deterministic)
-}
-func (m *Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Request.Merge(m, src)
-}
-func (m *Request) XXX_Size() int {
-	return xxx_messageInfo_Request.Size(m)
-}
-func (m *Request) XXX_DiscardUnknown() {
-	xxx_messageInfo_Request.DiscardUnknown(m)
+func (x ActivityType) String() string {
+	return proto.EnumName(ActivityType_name, int32(x))
 }
 
-var xxx_messageInfo_Request proto.InternalMessageInfo
-
-func (m *Request) GetCode() string {
-	if m != nil {
-		return m.Code
-	}
-	return ""
-}
-
-type Response struct {
-	Data                 string   `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *Response) Reset()         { *m = Response{} }
-func (m *Response) String() string { return proto.CompactTextString(m) }
-func (*Response) ProtoMessage()    {}
-func (*Response) Descriptor() ([]byte, []int) {
+func (ActivityType) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_646a8dd68e24f450, []int{1}
 }
 
-func (m *Response) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Response.Unmarshal(m, b)
-}
-func (m *Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Response.Marshal(b, m, deterministic)
-}
-func (m *Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Response.Merge(m, src)
-}
-func (m *Response) XXX_Size() int {
-	return xxx_messageInfo_Response.Size(m)
-}
-func (m *Response) XXX_DiscardUnknown() {
-	xxx_messageInfo_Response.DiscardUnknown(m)
+type ActivityAccess int32
+
+const (
+	ActivityAccess_Free      ActivityAccess = 0
+	ActivityAccess_ChildHide ActivityAccess = 1
+	ActivityAccess_ChildMust ActivityAccess = 2
+)
+
+var ActivityAccess_name = map[int32]string{
+	0: "Free",
+	1: "ChildHide",
+	2: "ChildMust",
 }
 
-var xxx_messageInfo_Response proto.InternalMessageInfo
+var ActivityAccess_value = map[string]int32{
+	"Free":      0,
+	"ChildHide": 1,
+	"ChildMust": 2,
+}
 
-func (m *Response) GetData() string {
-	if m != nil {
-		return m.Data
-	}
-	return ""
+func (x ActivityAccess) String() string {
+	return proto.EnumName(ActivityAccess_name, int32(x))
+}
+
+func (ActivityAccess) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{2}
+}
+
+type ActivityScope int32
+
+const (
+	ActivityScope_ToAll      ActivityScope = 0
+	ActivityScope_ToChildren ActivityScope = 1
+	ActivityScope_ToUser     ActivityScope = 2
+	ActivityScope_ToStaff    ActivityScope = 3
+)
+
+var ActivityScope_name = map[int32]string{
+	0: "ToAll",
+	1: "ToChildren",
+	2: "ToUser",
+	3: "ToStaff",
+}
+
+var ActivityScope_value = map[string]int32{
+	"ToAll":      0,
+	"ToChildren": 1,
+	"ToUser":     2,
+	"ToStaff":    3,
+}
+
+func (x ActivityScope) String() string {
+	return proto.EnumName(ActivityScope_name, int32(x))
+}
+
+func (ActivityScope) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{3}
+}
+
+type ArticleType int32
+
+const (
+	ArticleType_Lesson   ArticleType = 0
+	ArticleType_Announce ArticleType = 1
+	ArticleType_News     ArticleType = 2
+	ArticleType_Resident ArticleType = 3
+	ArticleType_ICH      ArticleType = 4
+)
+
+var ArticleType_name = map[int32]string{
+	0: "Lesson",
+	1: "Announce",
+	2: "News",
+	3: "Resident",
+	4: "ICH",
+}
+
+var ArticleType_value = map[string]int32{
+	"Lesson":   0,
+	"Announce": 1,
+	"News":     2,
+	"Resident": 3,
+	"ICH":      4,
+}
+
+func (x ArticleType) String() string {
+	return proto.EnumName(ArticleType_name, int32(x))
+}
+
+func (ArticleType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{4}
+}
+
+type MessageStatus int32
+
+const (
+	MessageStatus_MsgDraft  MessageStatus = 0
+	MessageStatus_MsgCheck  MessageStatus = 1
+	MessageStatus_MsgRefuse MessageStatus = 2
+	MessageStatus_MsgAgree  MessageStatus = 3
+)
+
+var MessageStatus_name = map[int32]string{
+	0: "MsgDraft",
+	1: "MsgCheck",
+	2: "MsgRefuse",
+	3: "MsgAgree",
+}
+
+var MessageStatus_value = map[string]int32{
+	"MsgDraft":  0,
+	"MsgCheck":  1,
+	"MsgRefuse": 2,
+	"MsgAgree":  3,
+}
+
+func (x MessageStatus) String() string {
+	return proto.EnumName(MessageStatus_name, int32(x))
+}
+
+func (MessageStatus) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{5}
+}
+
+type DisplayStatus int32
+
+const (
+	DisplayStatus_FDraft   DisplayStatus = 0
+	DisplayStatus_FPending DisplayStatus = 1
+	DisplayStatus_FPublish DisplayStatus = 2
+)
+
+var DisplayStatus_name = map[int32]string{
+	0: "FDraft",
+	1: "FPending",
+	2: "FPublish",
+}
+
+var DisplayStatus_value = map[string]int32{
+	"FDraft":   0,
+	"FPending": 1,
+	"FPublish": 2,
+}
+
+func (x DisplayStatus) String() string {
+	return proto.EnumName(DisplayStatus_name, int32(x))
+}
+
+func (DisplayStatus) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{6}
+}
+
+type DisplayAccess int32
+
+const (
+	DisplayAccess_Read  DisplayAccess = 0
+	DisplayAccess_Close DisplayAccess = 1
+	DisplayAccess_RW    DisplayAccess = 2
+	DisplayAccess_Write DisplayAccess = 3
+)
+
+var DisplayAccess_name = map[int32]string{
+	0: "Read",
+	1: "Close",
+	2: "RW",
+	3: "Write",
+}
+
+var DisplayAccess_value = map[string]int32{
+	"Read":  0,
+	"Close": 1,
+	"RW":    2,
+	"Write": 3,
+}
+
+func (x DisplayAccess) String() string {
+	return proto.EnumName(DisplayAccess_name, int32(x))
+}
+
+func (DisplayAccess) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{7}
+}
+
+type ContentOption int32
+
+const (
+	ContentOption_Stay     ContentOption = 0
+	ContentOption_Append   ContentOption = 1
+	ContentOption_Subtract ContentOption = 2
+)
+
+var ContentOption_name = map[int32]string{
+	0: "Stay",
+	1: "Append",
+	2: "Subtract",
+}
+
+var ContentOption_value = map[string]int32{
+	"Stay":     0,
+	"Append":   1,
+	"Subtract": 2,
+}
+
+func (x ContentOption) String() string {
+	return proto.EnumName(ContentOption_name, int32(x))
+}
+
+func (ContentOption) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{8}
+}
+
+type NoticeScope int32
+
+const (
+	NoticeScope_ToFamily   NoticeScope = 0
+	NoticeScope_ToDevice   NoticeScope = 1
+	NoticeScope_ToWebsite  NoticeScope = 2
+	NoticeScope_ToResident NoticeScope = 3
+	NoticeScope_ToRoute    NoticeScope = 4
+)
+
+var NoticeScope_name = map[int32]string{
+	0: "ToFamily",
+	1: "ToDevice",
+	2: "ToWebsite",
+	3: "ToResident",
+	4: "ToRoute",
+}
+
+var NoticeScope_value = map[string]int32{
+	"ToFamily":   0,
+	"ToDevice":   1,
+	"ToWebsite":  2,
+	"ToResident": 3,
+	"ToRoute":    4,
+}
+
+func (x NoticeScope) String() string {
+	return proto.EnumName(NoticeScope_name, int32(x))
+}
+
+func (NoticeScope) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{9}
+}
+
+type VersionStatus int32
+
+const (
+	VersionStatus_VNone   VersionStatus = 0
+	VersionStatus_VAlpha  VersionStatus = 1
+	VersionStatus_VBeta   VersionStatus = 2
+	VersionStatus_VStable VersionStatus = 3
+)
+
+var VersionStatus_name = map[int32]string{
+	0: "VNone",
+	1: "VAlpha",
+	2: "VBeta",
+	3: "VStable",
+}
+
+var VersionStatus_value = map[string]int32{
+	"VNone":   0,
+	"VAlpha":  1,
+	"VBeta":   2,
+	"VStable": 3,
+}
+
+func (x VersionStatus) String() string {
+	return proto.EnumName(VersionStatus_name, int32(x))
+}
+
+func (VersionStatus) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{10}
+}
+
+type GraphQuality int32
+
+const (
+	GraphQuality_None   GraphQuality = 0
+	GraphQuality_Low    GraphQuality = 1
+	GraphQuality_Middle GraphQuality = 2
+	GraphQuality_High   GraphQuality = 3
+)
+
+var GraphQuality_name = map[int32]string{
+	0: "None",
+	1: "Low",
+	2: "Middle",
+	3: "High",
+}
+
+var GraphQuality_value = map[string]int32{
+	"None":   0,
+	"Low":    1,
+	"Middle": 2,
+	"High":   3,
+}
+
+func (x GraphQuality) String() string {
+	return proto.EnumName(GraphQuality_name, int32(x))
+}
+
+func (GraphQuality) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{11}
+}
+
+type DependencyType int32
+
+const (
+	DependencyType_Module DependencyType = 0
+	DependencyType_Plugin DependencyType = 1
+)
+
+var DependencyType_name = map[int32]string{
+	0: "Module",
+	1: "Plugin",
+}
+
+var DependencyType_value = map[string]int32{
+	"Module": 0,
+	"Plugin": 1,
+}
+
+func (x DependencyType) String() string {
+	return proto.EnumName(DependencyType_name, int32(x))
+}
+
+func (DependencyType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{12}
+}
+
+type WordsType int32
+
+const (
+	WordsType_WTemplate WordsType = 0
+	WordsType_WBless    WordsType = 1
+	WordsType_WImage    WordsType = 2
+	WordsType_WOther    WordsType = 3
+	WordsType_WComment  WordsType = 4
+	WordsType_WMessage  WordsType = 5
+)
+
+var WordsType_name = map[int32]string{
+	0: "WTemplate",
+	1: "WBless",
+	2: "WImage",
+	3: "WOther",
+	4: "WComment",
+	5: "WMessage",
+}
+
+var WordsType_value = map[string]int32{
+	"WTemplate": 0,
+	"WBless":    1,
+	"WImage":    2,
+	"WOther":    3,
+	"WComment":  4,
+	"WMessage":  5,
+}
+
+func (x WordsType) String() string {
+	return proto.EnumName(WordsType_name, int32(x))
+}
+
+func (WordsType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{13}
+}
+
+type OptionType int32
+
+const (
+	OptionType_ONone   OptionType = 0
+	OptionType_OAgree  OptionType = 1
+	OptionType_ORefuse OptionType = 2
+	OptionType_OSwitch OptionType = 3
+)
+
+var OptionType_name = map[int32]string{
+	0: "ONone",
+	1: "OAgree",
+	2: "ORefuse",
+	3: "OSwitch",
+}
+
+var OptionType_value = map[string]int32{
+	"ONone":   0,
+	"OAgree":  1,
+	"ORefuse": 2,
+	"OSwitch": 3,
+}
+
+func (x OptionType) String() string {
+	return proto.EnumName(OptionType_name, int32(x))
+}
+
+func (OptionType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_646a8dd68e24f450, []int{14}
 }
 
 func init() {
-	proto.RegisterEnum("omo.msp.status.ResultStatus", ResultStatus_name, ResultStatus_value)
-	proto.RegisterType((*Request)(nil), "omo.msp.status.Request")
-	proto.RegisterType((*Response)(nil), "omo.msp.status.Response")
+	proto.RegisterEnum("omo.msp.status.ActivityStatus", ActivityStatus_name, ActivityStatus_value)
+	proto.RegisterEnum("omo.msp.status.ActivityType", ActivityType_name, ActivityType_value)
+	proto.RegisterEnum("omo.msp.status.ActivityAccess", ActivityAccess_name, ActivityAccess_value)
+	proto.RegisterEnum("omo.msp.status.ActivityScope", ActivityScope_name, ActivityScope_value)
+	proto.RegisterEnum("omo.msp.status.ArticleType", ArticleType_name, ArticleType_value)
+	proto.RegisterEnum("omo.msp.status.MessageStatus", MessageStatus_name, MessageStatus_value)
+	proto.RegisterEnum("omo.msp.status.DisplayStatus", DisplayStatus_name, DisplayStatus_value)
+	proto.RegisterEnum("omo.msp.status.DisplayAccess", DisplayAccess_name, DisplayAccess_value)
+	proto.RegisterEnum("omo.msp.status.ContentOption", ContentOption_name, ContentOption_value)
+	proto.RegisterEnum("omo.msp.status.NoticeScope", NoticeScope_name, NoticeScope_value)
+	proto.RegisterEnum("omo.msp.status.VersionStatus", VersionStatus_name, VersionStatus_value)
+	proto.RegisterEnum("omo.msp.status.GraphQuality", GraphQuality_name, GraphQuality_value)
+	proto.RegisterEnum("omo.msp.status.DependencyType", DependencyType_name, DependencyType_value)
+	proto.RegisterEnum("omo.msp.status.WordsType", WordsType_name, WordsType_value)
+	proto.RegisterEnum("omo.msp.status.OptionType", OptionType_name, OptionType_value)
 }
 
 func init() {
@@ -188,28 +520,47 @@ func init() {
 }
 
 var fileDescriptor_646a8dd68e24f450 = []byte{
-	// 358 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x4c, 0x91, 0x41, 0x6f, 0xd3, 0x40,
-	0x10, 0x85, 0x49, 0x69, 0x6b, 0x7b, 0xe2, 0xb8, 0xcb, 0x70, 0x81, 0x03, 0x08, 0xf5, 0x84, 0x38,
-	0xa4, 0x07, 0xfe, 0x41, 0x54, 0xe7, 0x44, 0x22, 0x64, 0x53, 0x90, 0xb8, 0xad, 0xd7, 0x83, 0xb2,
-	0xc2, 0xf6, 0x98, 0xdd, 0x31, 0x24, 0xfc, 0x47, 0x4e, 0xfc, 0x0a, 0xe0, 0x4f, 0xa0, 0xdd, 0x40,
-	0x95, 0xdb, 0x7c, 0xef, 0x3d, 0x3d, 0xfb, 0x69, 0xe1, 0xe9, 0xe8, 0x58, 0xf8, 0xc6, 0x8b, 0x96,
-	0xc9, 0xdf, 0x18, 0xee, 0x7b, 0x1e, 0x96, 0x51, 0xc3, 0x82, 0x7b, 0x5e, 0xf6, 0x7e, 0x5c, 0x1e,
-	0xcd, 0xeb, 0x67, 0x90, 0x54, 0xf4, 0x65, 0x22, 0x2f, 0x88, 0x70, 0x6e, 0xb8, 0xa5, 0x27, 0xb3,
-	0x17, 0xb3, 0x97, 0x59, 0x15, 0xef, 0xeb, 0xe7, 0x90, 0x56, 0xe4, 0x47, 0x1e, 0x3c, 0x05, 0xbf,
-	0xd5, 0xa2, 0xff, 0xfb, 0xe1, 0x7e, 0xf5, 0xf3, 0x0c, 0xf2, 0x8a, 0xfc, 0xd4, 0x49, 0x1d, 0xfb,
-	0x70, 0x0e, 0x49, 0x3d, 0x19, 0x43, 0xde, 0xab, 0x07, 0x98, 0x43, 0xba, 0xd1, 0xfb, 0x37, 0xb6,
-	0xb7, 0xa2, 0x66, 0x81, 0x2a, 0x1a, 0x49, 0x0b, 0xb5, 0xea, 0x0c, 0x0b, 0x80, 0x2d, 0x4b, 0xb9,
-	0xb7, 0x3e, 0xf0, 0x43, 0xbc, 0x82, 0xf9, 0xed, 0xaa, 0xdc, 0x1b, 0x1a, 0xc5, 0xf2, 0xa0, 0xce,
-	0x31, 0x83, 0x8b, 0xb2, 0x1f, 0xe5, 0xa0, 0x2e, 0x42, 0xf6, 0x1d, 0x7f, 0xa6, 0xe1, 0xc8, 0x97,
-	0xb8, 0x80, 0x2c, 0xf2, 0xc6, 0x7a, 0xaf, 0x12, 0x7c, 0x04, 0x8b, 0x88, 0x77, 0xc3, 0xe4, 0x75,
-	0xd3, 0x91, 0x4a, 0x43, 0xdb, 0x5b, 0xc7, 0x3b, 0xdb, 0xd8, 0xd8, 0x96, 0x85, 0x8f, 0x6f, 0x59,
-	0x36, 0x5a, 0xcc, 0x4e, 0x41, 0xb0, 0xd7, 0xec, 0x7a, 0x2d, 0xa5, 0x73, 0xec, 0xd4, 0x1c, 0x11,
-	0x8a, 0x5b, 0xfe, 0x36, 0x74, 0xac, 0xdb, 0xb5, 0xb6, 0x1d, 0xb5, 0x2a, 0x0f, 0xa1, 0x9a, 0xdc,
-	0x57, 0x72, 0xc7, 0xd0, 0x02, 0x15, 0xe4, 0xef, 0xc9, 0xd9, 0x4f, 0x87, 0x7f, 0x91, 0x26, 0x0e,
-	0x9c, 0xbc, 0xac, 0xec, 0xd0, 0x2a, 0x83, 0x8f, 0xa1, 0xb8, 0xf3, 0xe4, 0x4e, 0x66, 0xfd, 0x0a,
-	0x3f, 0x97, 0x07, 0xf1, 0x7e, 0xf9, 0xef, 0x04, 0xaf, 0x00, 0x82, 0xb4, 0x76, 0x44, 0xdf, 0x49,
-	0xfd, 0x49, 0xb0, 0x80, 0xac, 0xde, 0xd6, 0x1f, 0xc8, 0xec, 0xb4, 0xa8, 0x1f, 0xe9, 0xaa, 0xf8,
-	0x98, 0x9f, 0xbe, 0x60, 0x73, 0x19, 0xe9, 0xf5, 0xdf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x48, 0x13,
-	0xc2, 0x53, 0xd8, 0x01, 0x00, 0x00,
+	// 662 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x4c, 0x54, 0x4f, 0x6f, 0xfa, 0x38,
+	0x10, 0x05, 0x02, 0x14, 0xa6, 0x04, 0x59, 0xb9, 0xed, 0x37, 0x58, 0xe5, 0xd0, 0xdf, 0xa1, 0x87,
+	0xdd, 0xcb, 0xae, 0x14, 0x40, 0x2c, 0x95, 0x0a, 0x74, 0x81, 0x12, 0xa9, 0x37, 0x93, 0x0c, 0x89,
+	0xb5, 0x8e, 0x27, 0x8a, 0x9d, 0x56, 0x7c, 0xfb, 0x95, 0xe3, 0xf0, 0xe7, 0x96, 0x37, 0xb6, 0xe7,
+	0xf9, 0xcd, 0x7b, 0x0e, 0xfc, 0x56, 0x56, 0x64, 0xe8, 0x97, 0x36, 0xdc, 0xd4, 0xfa, 0x57, 0x42,
+	0x45, 0x41, 0xea, 0xa5, 0xa9, 0x05, 0x53, 0x2a, 0xe8, 0xa5, 0xd0, 0xe5, 0x8b, 0x5b, 0x0c, 0xbf,
+	0x60, 0x1a, 0x25, 0x46, 0x7c, 0x0b, 0x73, 0xd9, 0x37, 0x95, 0x60, 0x0c, 0x83, 0x45, 0xc5, 0xcf,
+	0x86, 0x75, 0xec, 0xe7, 0x3c, 0xc7, 0xe4, 0x3f, 0xd6, 0x0d, 0x9e, 0xe1, 0xe9, 0x03, 0x55, 0x2a,
+	0x54, 0xc6, 0x7a, 0x16, 0xec, 0x50, 0x22, 0xd7, 0xc8, 0xbc, 0x66, 0xa5, 0x3e, 0x49, 0xa1, 0x73,
+	0xd6, 0xb7, 0x20, 0x3a, 0x71, 0x95, 0x92, 0x62, 0x83, 0x30, 0x85, 0xc9, 0xb5, 0xf7, 0xe1, 0x52,
+	0x62, 0x00, 0x30, 0xdc, 0x50, 0x55, 0x70, 0xc9, 0x3a, 0xc1, 0x04, 0x46, 0x07, 0x2c, 0x4a, 0xc9,
+	0x0d, 0xb2, 0x6e, 0x30, 0x82, 0xfe, 0xb6, 0x44, 0xc5, 0x7a, 0xb6, 0x3e, 0xc3, 0x4c, 0x28, 0x85,
+	0x95, 0xeb, 0xbd, 0x43, 0xde, 0xb0, 0xf6, 0xed, 0x6d, 0x3e, 0x24, 0x4f, 0x90, 0x0d, 0x6c, 0xa7,
+	0x79, 0xad, 0x0d, 0x15, 0x6c, 0x18, 0xfe, 0x79, 0x57, 0x10, 0x25, 0x09, 0x6a, 0x6d, 0xbb, 0x2d,
+	0x2b, 0x44, 0xd6, 0x09, 0x7c, 0x18, 0xcf, 0x73, 0x21, 0xd3, 0x95, 0x48, 0x2d, 0xcd, 0x15, 0xae,
+	0x6b, 0x6d, 0x58, 0x2f, 0x9c, 0x83, 0x7f, 0xd3, 0x9e, 0x50, 0x89, 0x96, 0xe1, 0x40, 0x91, 0xb4,
+	0xf7, 0x9b, 0x02, 0x1c, 0xa8, 0xd9, 0x5c, 0xa1, 0x62, 0x5d, 0xcb, 0x78, 0xa0, 0x4f, 0x8d, 0x95,
+	0x93, 0x7f, 0xa0, 0xbd, 0xe1, 0xe7, 0x33, 0xf3, 0xc2, 0x15, 0x3c, 0x47, 0x95, 0x11, 0x89, 0xc4,
+	0xab, 0xc6, 0x77, 0xd4, 0x9a, 0x94, 0xd3, 0x18, 0x29, 0x45, 0xb5, 0x4a, 0x5a, 0x8d, 0x1b, 0xfc,
+	0xd1, 0x4e, 0xe3, 0x0e, 0xb5, 0x48, 0x51, 0x19, 0xe6, 0x05, 0x4f, 0xe0, 0xbd, 0xcd, 0x57, 0xac,
+	0x1f, 0xae, 0xc0, 0x5f, 0xa3, 0xd6, 0x3c, 0xc3, 0xd6, 0x89, 0x09, 0x8c, 0xd6, 0x3a, 0xbb, 0x9a,
+	0xe1, 0xd0, 0xd5, 0x0f, 0x1f, 0xc6, 0x6b, 0x9d, 0xed, 0xf0, 0x5c, 0x6b, 0x74, 0x2d, 0xd7, 0x3a,
+	0x8b, 0x32, 0x2b, 0xdb, 0x0b, 0xff, 0x00, 0x7f, 0x21, 0x74, 0x29, 0xf9, 0xd5, 0x53, 0x80, 0xe1,
+	0xf2, 0xa1, 0xcf, 0xf2, 0x6a, 0x65, 0xd7, 0xa1, 0xd6, 0xbe, 0xde, 0xc3, 0xc1, 0xfb, 0x28, 0xad,
+	0x01, 0x6d, 0x16, 0x24, 0x69, 0xab, 0x64, 0x08, 0xbd, 0x5d, 0xcc, 0x7a, 0xb6, 0x14, 0x57, 0xc2,
+	0x58, 0xc6, 0x57, 0xf0, 0xe7, 0xa4, 0x0c, 0x2a, 0xb3, 0x2d, 0x8d, 0x20, 0x65, 0x0f, 0xee, 0x0d,
+	0xbf, 0xb0, 0x8e, 0xe5, 0x8e, 0xca, 0x12, 0x55, 0xea, 0xd8, 0xf6, 0xf5, 0xc9, 0x54, 0x3c, 0xb1,
+	0xf3, 0xff, 0x84, 0xe7, 0x0d, 0x19, 0x91, 0xa0, 0x9b, 0xbe, 0x8d, 0x04, 0x2d, 0x79, 0x21, 0xe4,
+	0xa5, 0x0d, 0x08, 0x2d, 0xf0, 0x5b, 0x24, 0xad, 0x73, 0x07, 0x8a, 0xf1, 0xa4, 0x2d, 0x5d, 0xcf,
+	0xb9, 0xf3, 0x30, 0xc3, 0xc6, 0x91, 0x1d, 0xd5, 0x06, 0x59, 0x3f, 0xfc, 0x1b, 0xfc, 0x23, 0x56,
+	0x5a, 0x90, 0xba, 0x27, 0xfa, 0xb8, 0x21, 0x85, 0xee, 0x32, 0xc7, 0x48, 0x96, 0x39, 0x67, 0xdd,
+	0xa6, 0x3c, 0x43, 0xc3, 0x9d, 0xa3, 0xc7, 0xbd, 0xe1, 0x27, 0xe9, 0xa6, 0x37, 0xf9, 0xa7, 0xe2,
+	0x65, 0xfe, 0x6f, 0xcd, 0xa5, 0x30, 0x97, 0xc6, 0x38, 0x77, 0xfa, 0x09, 0xbc, 0x77, 0xfa, 0x71,
+	0x69, 0x58, 0x8b, 0x34, 0x95, 0xf6, 0x2e, 0x23, 0xe8, 0xaf, 0x44, 0x96, 0x33, 0x2f, 0xfc, 0x1d,
+	0xa6, 0x0b, 0xb4, 0x4a, 0x51, 0x25, 0xb7, 0xc4, 0xaf, 0x29, 0xad, 0x65, 0x4b, 0xfd, 0x21, 0xeb,
+	0x4c, 0x28, 0xd6, 0x0d, 0xbf, 0x60, 0x1c, 0x53, 0x95, 0xea, 0x66, 0x93, 0x0f, 0xe3, 0xf8, 0xf6,
+	0x16, 0x9a, 0x7d, 0xf1, 0x4c, 0xa2, 0xd6, 0x8e, 0x27, 0x7e, 0x2b, 0x78, 0x66, 0x79, 0xec, 0xf7,
+	0xd6, 0xe4, 0xcd, 0xbb, 0x98, 0xc0, 0x28, 0x9e, 0x53, 0x51, 0x58, 0xf5, 0xfd, 0x06, 0xb5, 0xc9,
+	0x61, 0x83, 0xf0, 0x2f, 0x00, 0xe7, 0x41, 0xd3, 0x7c, 0x0c, 0x83, 0xed, 0x5d, 0xfb, 0xd6, 0x25,
+	0xa4, 0x79, 0xce, 0xdb, 0x5b, 0x78, 0x2c, 0xd8, 0xff, 0x08, 0x93, 0xe4, 0xcc, 0x9b, 0x4d, 0xbf,
+	0x26, 0x8f, 0x7f, 0x8f, 0xd3, 0xb0, 0x41, 0xaf, 0xff, 0x07, 0x00, 0x00, 0xff, 0xff, 0x4a, 0x9b,
+	0xa3, 0xf5, 0x54, 0x04, 0x00, 0x00,
 }

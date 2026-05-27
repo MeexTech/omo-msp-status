@@ -3,36 +3,111 @@ syntax = "proto3";
 package omo.msp.status;
 option go_package= "proto/status";
 
-enum ResultStatus {
-  Success = 0;
-  MaxLimit = 1;
-  Repeated = 2;
-  NotExisted = 3;
-  DBException = 4;
-  Empty = 5;
-  TokenEmpty = 6;
-  TokenMiss = 7;
-  TokenUnusable = 8;
-  Prohibition = 9;
-  NotMatch = 10;
-  FormatError = 11;
-  DownloadFailed = 12;
-  ServerError = 13;
-
-  VerifyFailed = 98;
-  MustBind = 99;
-
-  UserNotExisted = 1001;
-  UserRepeated = 1002;
-  UserFreeze = 1003;
-  SNSWechat = 1101;
+enum ActivityStatus {
+    Draft   = 0; //草稿
+    Check   = 1; // 审核中
+    Pending = 2; // 审核通过，待发布或者释放
+    Release = 3; // 释放成功
+    Publish = 4; // 发布成功
+    Abandon = 5; // 活动废弃
 }
 
-message Request{
-  string code = 1;
+enum ActivityType {
+    Normal   = 0; //默认活动
+    Template = 1; // 模板活动
+    Open     = 2; //开放活动
+    Beginner = 3; //诵读活动
+    Reading  = 4; //阅读活动
+    Place    = 5; //研学活动
+    Custom   = 6; //自定义活动
 }
 
-message Response{
-  string data = 1;
+enum ActivityAccess {
+    Free = 0; //自由访问
+    ChildHide = 1; //子场景不可见
+    ChildMust = 2; //子场景可见且必做
 }
 
+enum ActivityScope {
+    ToAll      = 0; //对所有人可见
+    ToChildren = 1; //小孩
+    ToUser     = 2; //C端用户
+    ToStaff    = 3; //职工
+}
+
+enum ArticleType {
+    Lesson   = 0; //课件
+    Announce = 1; //校园公告
+    News     = 2; //区新闻
+    Resident = 3; //格桑码新闻
+    ICH      = 4; //非遗新闻
+}
+
+enum MessageStatus {
+    MsgDraft   = 0; //草稿
+    MsgCheck   = 1; // 审核中
+    MsgRefuse = 2; // 拒绝
+    MsgAgree  = 3; // 同意
+}
+
+enum DisplayStatus {
+    FDraft   = 0; //草稿
+    FPending = 1; // 审核中，待发布或者释放
+    FPublish = 2; // 发布成功
+}
+
+enum DisplayAccess {
+    Read  = 0; //只读
+    Close = 1; //关闭
+    RW    = 2; //读写权限
+    Write = 3; //写权限
+}
+
+enum ContentOption {
+    Stay    = 0; //稳定
+    Append   = 1; //追加内容
+    Subtract = 2; //减去内容
+}
+
+enum NoticeScope {
+    ToFamily = 0; //发送到小程序
+    ToDevice = 1; //发送到设备
+    ToWebsite = 2; //发送到网站
+    ToResident = 3; //对格桑码居民
+    ToRoute = 4; //对应
+}
+
+enum VersionStatus{
+    VNone = 0;
+    VAlpha = 1; //开发中
+    VBeta = 2; //公测
+    VStable = 3; //正式版本
+}
+
+enum GraphQuality{
+    None     = 0;
+    Low     = 1;
+    Middle  = 2;
+    High    = 3;
+}
+
+enum DependencyType{
+    Module = 0;
+    Plugin = 1;
+}
+
+enum WordsType{
+    WTemplate = 0; //
+    WBless = 1; //祝福
+    WImage = 2; //图片留言
+    WOther = 3; //图文留言
+    WComment = 4; //评论
+    WMessage = 5; //需求建议
+}
+
+enum OptionType{
+    ONone = 0; //无
+    OAgree = 1; //同意
+    ORefuse = 2; //拒绝
+    OSwitch = 3; //切换关联
+}
