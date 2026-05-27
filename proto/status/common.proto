@@ -7,16 +7,19 @@ enum ActivityStatus {
     Draft   = 0; //草稿
     Check   = 1; // 审核中
     Pending = 2; // 审核通过，待发布或者释放
-    Release = 3; // 释放成功
-    Publish = 4; // 发布成功
+    Release = 3; // 释放成功；发送到b端，由b端clone一个相同内容的活动到c端
+    Publish = 4; // 直接发送到c端
     Abandon = 5; // 活动废弃
+    Ready     = 101; //准备中
+    Being     = 102; //进行中
+    Over      = 103; //已结束
 }
 
 enum ActivityType {
     Normal   = 0; //默认活动
     Template = 1; // 模板活动
     Open     = 2; //开放活动
-    Beginner = 3; //诵读活动
+    Recitation = 3; //诵读活动
     Reading  = 4; //阅读活动
     Place    = 5; //研学活动
     Custom   = 6; //自定义活动
@@ -106,8 +109,118 @@ enum WordsType{
 }
 
 enum OptionType{
-    ONone = 0; //无
+    ODefault = 0; //无
     OAgree = 1; //同意
     ORefuse = 2; //拒绝
     OSwitch = 3; //切换关联
+}
+
+enum DisplayType{
+    ShowAll = 0;
+    ShowHeroStandard = 1; //标准大榜样展览
+    ShowHero = 2; //自定义大榜样展览
+    ShowExample = 3; //本地榜样展
+    ShowActivity = 4; //活动展
+    ShowQR = 5; //扫码展
+    ShowAtlas = 6; //图片展览
+    ShowProp = 7;  // 本地物品展
+    ShowRecitation = 8;  // 朗诵
+    ShowPlace  = 9;  //实践打卡
+    ShowBooks  = 10; //阅读
+    ShowHonor  = 11; //荣誉墙
+    ShowAR = 12; //AR
+}
+
+enum AssetType{
+    APerson = 0;
+    AGroup = 1; //组织
+    AWindowModel = 2; //windows 平台模型
+    AAndroidModel = 3; //web 平台模型
+    AAudio = 4;
+    AVideo = 5;
+    APortrait = 6; //系统头像
+    AIcon = 7; //图标库
+    ACertify = 8; //证书
+}
+
+enum AssetScope{
+    Personal = 0;
+    Org      = 1;
+    System   = 2;
+}
+
+enum AssetStatus{
+    APrivate = 0;
+    APending = 1; //待审
+    APublish = 2; //审核通过
+    AVisible = 3; //可展示
+}
+
+enum FolderType{
+    FDefault = 0; //无文件夹
+    FRecitation = 1; //诵读文件夹
+    FReading    = 2; //阅读文件夹
+    FPlace = 3; //研学文件夹
+    FDigital = 4; //数字文件夹
+    FDIYCover   = 5; //自定义封面文件夹
+    FLabel = 6; //标签文件夹
+    FImage = 7; //图片文件夹
+}
+
+enum MaintainType {
+    MReason = 0;
+    MResult = 1;
+    MSuggest = 2;
+}
+
+enum DeviceStatus{
+    DIdle = 0;  //未绑定
+    DBind = 1;  //已经绑定但未分配
+    DFill = 2;  //已经绑定也分配了场景
+    DAwake = 3;  //未激活
+    DDiscard = 99; //废弃
+}
+
+enum SceneType {
+    Other      = 0; // 未知
+    School    = 1; // 学校
+    Museum    = 2; // 博物馆
+    Government = 3; // 政府部门
+    Nursery   = 4; // 幼儿园
+    Maker     = 5; //实践中心，创客
+    Children  = 6; //少年宫
+    Enterprise = 7; //企业
+    Community = 8; //社区
+}
+
+enum ApplyStatus {
+    SPending = 0;//待审核
+    SPass = 1;//通过
+    SRefused = 2;//被拒
+    SNull = 5;//不存在
+    SStay = 6;//搁置
+}
+
+enum ApplyType {
+    ADefault = 0;
+    AAdmin = 1;
+}
+
+enum MeetingStatus {
+    MPending = 0;
+    MIdle = 1;//已经开始
+    MAutoStop = 2;//自动停止
+    MClose = 3;//关闭
+}
+
+enum MeetingLocation {
+    InRoom = 0;
+    Outside = 1;
+}
+
+enum TaskStatus{
+    TIdle = 0;
+    TBusy = 1;
+    TEnd = 2;
+    TFroze = 99;
 }
