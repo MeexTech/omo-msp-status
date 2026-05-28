@@ -109,10 +109,10 @@ enum WordsType{
 }
 
 enum OptionType{
-    ODefault = 0; //无
-    OAgree = 1; //同意
-    ORefuse = 2; //拒绝
-    OSwitch = 3; //切换关联
+    Idle = 0; //待处理
+    Agree = 1; //同意
+    Refuse = 2; //拒绝
+    Switch = 3; //切换关联
 }
 
 enum DisplayType{
@@ -223,4 +223,87 @@ enum TaskStatus{
     TBusy = 1;
     TEnd = 2;
     TFroze = 99;
+}
+
+enum EntityStatus{
+    ESDraft  = 0;
+    ESFirst = 1;
+    ESPending = 2;
+    ESVisible = 3;
+    ESUsable  = 4; //审核通过
+    ESFailed  = 10;
+    ESAll     = 99;
+}
+
+enum AttributeType {
+    String   = 0;
+    Date    = 1;
+    Number   = 2;
+    Entity   = 3;
+    Sex      = 4;
+    Address  = 5;
+}
+
+enum ConceptType{
+    CTUnknown = 0;
+    CTPersonal = 1;  //人物
+    CTUtensil = 2;  // 器物
+    CTEvent = 3;  //事件
+    CTOrganize = 4;  // 组织机构
+    CTIdea = 5;  //思想理论
+    CTBook = 6;  //经籍著作
+    CTCulture = 7;  //文化
+    CTFaction = 8;  //派别
+    CTNature = 9;  //自然风光
+    CTHonor = 10; //荣誉奖项
+    CTPlace = 11; //地理位置
+    CTEra = 12; // 时代
+}
+
+enum EventType{
+    ETCustom = 0; //用户自定义事件，可以修改
+    ETSSystem = 1; //系统默认生成的事件，不能更改,比如活动
+    ETHonor  = 2; //用户定义的荣誉事件
+    ETSpec   = 3; //特殊事件
+}
+
+enum EntityAccess{
+    EARead    = 0; //可读
+    EAPrivate = 1; //仅自己可见
+    EAWR      = 2; //可读写
+    EAPublic  = 3; //审核通过
+}
+
+enum EventSubType{
+    ESCommon      = 0; //通用
+    ESRecitation = 1; //朗诵
+    ESReading    = 2; //阅读
+    ESPlace      = 3; //实践地点
+    ESCertify       = 4; //证书
+    ESWords      = 5; //留言
+}
+
+enum ExamineType{
+    ETBase       = 0; //基本信息
+    ETAttribute  = 1; //属性
+    ETEvent      = 2; //事件
+}
+
+enum DirectionType{
+    Double = 0;
+    FromTo = 1;
+    ToFrom = 2;
+}
+
+enum RelationType{
+    RTUnknown  = 0;
+    RTPersons  = 1; // 人对人
+    RTEvents   = 2; // 人与非人
+    RTInhuman  = 3; // 非人与非人
+}
+
+enum EntityTemplate{
+    Base = 0;
+    Activity = 1;
+    Honor = 2;
 }
